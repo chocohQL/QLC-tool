@@ -7,7 +7,9 @@ import com.chocoh.ql.demo.data.Data2;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author chocoh
@@ -17,11 +19,11 @@ public class Demo1 {
         // 准备数据
         ArrayList<Data1> d1 = data1();
         ArrayList<Data2> d2 = data2();
-        // 创建曲线
-        ICurve<Data1, Double> curve1 = Curve.createCurve(d1);
-        ICurve<Data2, Double> curve2 = Curve.createCurve(d2);
+        // 创建曲线（继承了List）
+        ICurve<Data1, Double> curve1 = Curve.create(d1);
+        ICurve<Data2, Double> curve2 = Curve.create(d2);
         // 曲线计算
-        List<Data1> data = curve1
+        curve1
                 // 计算
                 .process(c -> c.getVal() * 2, Data1::setVal)
                 // 条件计算
@@ -34,9 +36,8 @@ public class Demo1 {
                         (c1, c2) -> c1.getVal() + c2.getVal(),
                         Data1::setVal)
                 // 消费
-                .process(c -> System.out.print(Double.valueOf(df.format(c.getVal())).toString() + ' '))
-                // 获取原集合
-                .getData();
+                .process(c -> System.out.print(Double.valueOf(df.format(c.getVal())).toString() + ' '));
+        // processWhile biProcessWhile sort
     }
 
     private static final DecimalFormat df = new DecimalFormat("#.00");

@@ -1,7 +1,6 @@
 package com.chocoh.ql.demo;
 
 import com.chocoh.ql.core.curve.CurveGroup;
-import com.chocoh.ql.core.curve.ICurve;
 import com.chocoh.ql.core.curve.ICurveGroup;
 import com.chocoh.ql.demo.data.Data1;
 import com.chocoh.ql.demo.data.Data2;
@@ -17,9 +16,9 @@ public class Demo2 {
         // 准备数据
         ArrayList<Data1> d1 = data1();
         ArrayList<Data2> d2 = data2();
-        // 创建曲线分组
-        ICurveGroup<String, Data1, Double> g1 = CurveGroup.createGroup(d1, Data1::getType);
-        ICurveGroup<String, Data2, Double> g2 = CurveGroup.createGroup(d2, Data2::getType);
+        // 创建曲线分组（继承了Map）
+        ICurveGroup<String, Data1, Double> g1 = CurveGroup.create(d1, Data1::getType);
+        ICurveGroup<String, Data2, Double> g2 = CurveGroup.create(d2, Data2::getType);
         // 分组计算
         g1
                 // 分组叠加计算
@@ -37,8 +36,6 @@ public class Demo2 {
                             .process(c -> Double.valueOf(df.format(c.getVal())), Data1::setVal)
                             .process(c -> System.out.print(c.getVal().toString() + " "));
                 });
-        // 继承了 HashMap 所有方法
-        ICurve<Data1, Double> curve = g1.get("000");
     }
 
     private static final DecimalFormat df = new DecimalFormat("#.00");

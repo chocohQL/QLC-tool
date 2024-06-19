@@ -11,11 +11,9 @@ import java.util.function.BiConsumer;
  */
 @SuppressWarnings("UnusedReturnValue")
 public interface ICurveGroup<K, T, V> extends Map<K, ICurve<T, V>> {
-    ICurveGroup<K, T, V> process(BiConsumer<K, ICurve<T, V>> biC);
+    ICurveGroup<K, T, V> process(BiConsumer< K, ICurve<T, V>> biC);
 
-    ICurveGroup<K, T, V> mergeGroup(ICurveGroup<K, T, V> group);
+    <U> ICurveGroup<K, T, V> biProcess(ICurveGroup<K, U, V> group, TriFunction< K,  T,  U,  V> biF, BiConsumer< T,  V> biC);
 
-    <U> ICurveGroup<K, T, V> biProcess(ICurveGroup<K, U, V> group, TriFunction<K, T, U, V> biF, BiConsumer<T, V> biC);
-
-    <U> ICurveGroup<K, T, V> biProcess(ICurveGroup<K, U, V> group, TriPredicate<K, T, U> biP, TriFunction<K, T, U, V> biF, BiConsumer<T, V> biC);
+    <U> ICurveGroup<K, T, V> biProcess(ICurveGroup<K, U, V> group, TriPredicate< K,  T,  U> biP, TriFunction< K,  T,  U,  V> biF, BiConsumer< T,  V> biC);
 }
