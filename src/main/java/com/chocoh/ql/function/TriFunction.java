@@ -1,4 +1,4 @@
-package com.chocoh.ql.core.function;
+package com.chocoh.ql.function;
 
 /**
  * @author chocoh
