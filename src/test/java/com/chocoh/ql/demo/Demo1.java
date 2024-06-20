@@ -2,6 +2,7 @@ package com.chocoh.ql.demo;
 
 import com.chocoh.ql.curve.ICurve;
 import com.chocoh.ql.curve.Curve;
+import com.chocoh.ql.curve.ProcessorCurve;
 import com.chocoh.ql.demo.data.Data1;
 import com.chocoh.ql.demo.data.Data2;
 
@@ -18,8 +19,8 @@ public class Demo1 {
         ArrayList<Data2> data2 = data2();
         // 创建曲线1
         ICurve<Data2, Double> curve2 = Curve.create(data2);
-        // 创建曲线2
-        ICurve<Data1, Double> curve1 = new Curve.Builder<Data1, Double>()
+        // 创建曲线2（Curve为基本曲线操作，ProcessorCurve提供了前后置处理器增强）
+        ICurve<Data1, Double> curve1 = new ProcessorCurve.Builder<Data1, Double>()
                 // 数据
                 .data(data1)
                 // 前置数据处理器
@@ -35,7 +36,7 @@ public class Demo1 {
                 // 是否开启曲线处理器（默认true）
                 .enableDataProcessor(true)
                 .build();
-        // 曲线计算（实现了 List ）
+        // 曲线计算（实现了List）
         curve1
                 // 计算
                 .process(d -> d.getVal() * 2, Data1::setVal)
