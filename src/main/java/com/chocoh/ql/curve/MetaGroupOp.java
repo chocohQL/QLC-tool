@@ -9,7 +9,7 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 
 /**
- * 曲线分组元操作
+ * 分组曲线元操作
  *
  * @author chocoh
  */

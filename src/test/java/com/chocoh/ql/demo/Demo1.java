@@ -10,6 +10,15 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
+ * 【曲线测试】
+ *
+ * <p>曲线接口 IGroup 继承了 List , 实现类 Curve 继承了 ArrayList , 可以当作普通 List 使用.</p>
+ * <p>1. 通过静态 create 方法创建一个曲线, 需要传入数据集合.</p>
+ * <p>2. 使用函数式编程的方式实现曲线的自定义公式计算、处理、多曲线叠加等操作.</p>
+ * <p>3. 基本操作针对单条数据的, 如果曲线叠加操作则是对相同下标的数据进行处理（默认两条曲线长度相同）.</p>
+ * <p>4. 两条曲线的数据可以是不同的类, 即不同类型的曲线也可以进行操作, 但需要提前规定返回值类型.</p>
+ * <p>5. Curve 只提供了基础的曲线操作, ProcessorCurve 提供了前后置处理器增强.</p>
+ *
  * @author chocoh
  */
 public class Demo1 {
@@ -19,7 +28,7 @@ public class Demo1 {
         ArrayList<Data2> data2 = data2();
         // 创建曲线1
         ICurve<Data2, Double> curve2 = Curve.create(data2);
-        // 创建曲线2（Curve为基本曲线操作，ProcessorCurve提供了前后置处理器增强）
+        // 创建曲线2
         ICurve<Data1, Double> curve1 = new ProcessorCurve.Builder<Data1, Double>()
                 // 数据
                 .data(data1)
@@ -31,10 +40,6 @@ public class Demo1 {
                 .preCurveProcessor(curve -> System.out.println("process: "), "c1")
                 // 后置曲线处理器
                 .postCurveProcessor(curve -> System.out.println(), "c2")
-                // 是否开启数据处理器（默认true）
-                .enableDataProcessor(true)
-                // 是否开启曲线处理器（默认true）
-                .enableDataProcessor(true)
                 .build();
         // 曲线计算（实现了List）
         curve1

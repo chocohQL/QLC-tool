@@ -9,6 +9,13 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
+ * 【分组曲线测试】
+ *
+ * <p>分组曲线接口 ICurveGroup 继承了 Map , 实现类 CurveGroup 继承了 HashMap , 可以当作普通 Map 使用.</p>
+ * <p>1. 通过静态 create 方法创建一个分组, 需要传入数据集合和分组规则. </p>
+ * <p>2. 通过与 Curve 类似的函数式调用可以实现分组处理, 注意函数式接口会多给出每组的 Key .</p>
+ * <p>3. 基本操作与 Curve 一样是针对单条数据的, 只不过它进行了分组, 当然你也可以用 forCurve 方法直接调出对应分组的曲线.</p>
+ *
  * @author chocoh
  */
 public class Demo2 {
