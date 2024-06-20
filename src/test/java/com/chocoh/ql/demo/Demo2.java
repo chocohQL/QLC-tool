@@ -16,10 +16,11 @@ public class Demo2 {
         // 准备数据
         ArrayList<Data1> data1 = data1();
         ArrayList<Data2> data2 = data2();
-        // 创建曲线分组（继承了Map）
+        // 创建曲线分组1
         ICurveGroup<String, Data1, Double> curveGroup1 = CurveGroup.create(data1, Data1::getType);
+        // 创建曲线分组2
         ICurveGroup<String, Data2, Double> curveGroup2 = CurveGroup.create(data2, Data2::getType);
-        // 分组计算
+        // 分组计算（实现了 Map ）
         curveGroup1
                 // 分组计算
                 .process((Key, d) -> d.getVal() + 0.1, Data1::setVal)

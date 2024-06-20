@@ -16,19 +16,27 @@ public class Demo1 {
         // 准备数据
         ArrayList<Data1> data1 = data1();
         ArrayList<Data2> data2 = data2();
-        // 创建曲线（继承了List）
-        ICurve<Data1, Double> curve1 = Curve.create(data1);
+        // 创建曲线1
         ICurve<Data2, Double> curve2 = Curve.create(data2);
-        // 曲线计算
+        // 创建曲线2
+        ICurve<Data1, Double> curve1 = new Curve.Builder<Data1, Double>()
+                // 数据
+                .data(data1)
+                // 前置数据处理器
+                .preDataProcessor(d -> System.out.print(d.getVal() + " -> "), "p1")
+                // 后置数据处理器
+                .postDataProcessor(d -> System.out.print(d.getVal() + "    "), "p2")
+                // 前置曲线处理器
+                .preCurveProcessor(curve -> System.out.println("process: "), "c1")
+                // 后置曲线处理器
+                .postCurveProcessor(curve -> System.out.println(), "c2")
+                // 是否开启数据处理器（默认true）
+                .enableDataProcessor(true)
+                // 是否开启曲线处理器（默认true）
+                .enableDataProcessor(true)
+                .build();
+        // 曲线计算（实现了 List ）
         curve1
-                // 全局前置处理器
-                .globalPreProcessor(curve -> System.out.println("process:"))
-                // 全局后置处理器
-                .globalPostProcessor(curve -> System.out.println())
-                // 前置处理器
-                .preProcessor(d -> System.out.print(d.getVal() + "->"))
-                // 后置处理器
-                .postProcessor(d -> System.out.print(d.getVal() + "\t"))
                 // 计算
                 .process(d -> d.getVal() * 2, Data1::setVal)
                 // 条件计算

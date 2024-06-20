@@ -21,12 +21,4 @@ public interface ICurve<T, V> extends List<T> {
     <U> ICurve<T, V> multiProcess(List<ICurve<U, V>> cs, BiFunction<T, U, V> biF, BiConsumer<T, V> biC);
 
     <U> ICurve<T, V> multiProcess(List<ICurve<U, V>> cs, BiPredicate<T, U> biP, BiFunction<T, U, V> biF, BiConsumer<T, V> biC);
-
-    Curve<T, V> preProcessor(Consumer<T> c);
-
-    Curve<T, V> postProcessor(Consumer<T> c);
-
-    Curve<T, V> globalPreProcessor(Consumer<ICurve<T, V>> c);
-
-    Curve<T, V> globalPostProcessor(Consumer<ICurve<T, V>> c);
 }
