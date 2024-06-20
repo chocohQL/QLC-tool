@@ -21,6 +21,8 @@ public class Demo2 {
         ICurveGroup<String, Data2, Double> curveGroup2 = CurveGroup.create(data2, Data2::getType);
         // 分组计算
         curveGroup1
+                // 分组计算
+                .process((Key, d) -> d.getVal() + 0.1, Data1::setVal)
                 // 分组叠加计算
                 .biProcess(curveGroup2, (key, d1, d2) -> d1.getVal() + d2.getVal(), Data1::setVal)
                 // 分组条件叠加计算
@@ -28,9 +30,17 @@ public class Demo2 {
                         (key, d1, d2) -> d1.getVal() + d2.getVal() > 0.5 || key.equals("00"),
                         (key, d1, d2) -> d1.getVal() * 2,
                         Data1::setVal)
-                // 分组计算
-                .process((key, d) -> Double.valueOf(df.format(d.getVal())), Data1::setVal)
-                .process((key, d) -> System.out.println(key + ": " + d.getVal().toString()));
+                // 曲线分组
+                .forCurve(curveGroup2, (key, curve1, curve2) -> {
+                    System.out.println(key + ":");
+                    curve1
+                            .process(d -> Double.valueOf(df.format(d.getVal())), Data1::setVal)
+                            .process(d -> System.out.print(d.getVal() + "\t"));
+                    System.out.println();
+                    curve2
+                            .process(d -> System.out.print(d.getVal() + "\t"));
+                    System.out.println();
+                });
     }
 
     private static final DecimalFormat df = new DecimalFormat("#.00");

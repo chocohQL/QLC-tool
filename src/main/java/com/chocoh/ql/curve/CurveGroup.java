@@ -38,6 +38,16 @@ public class CurveGroup<K, T, V> extends HashMap<K, ICurve<T, V>> implements ICu
         return keySetTraversal(cG, (k, c1, c2) -> biProcess(c1, c2, k, triP, triF, biC));
     }
 
+    @Override
+    public ICurveGroup<K, T, V> forCurve(BiConsumer<K, ICurve<T, V>> biC) {
+        return keySetTraversal(biC);
+    }
+
+    @Override
+    public <U> ICurveGroup<K, T, V> forCurve(ICurveGroup<K, U, V> cG, TriConsumer<K, ICurve<T, V>, ICurve<U, V>> biC) {
+        return keySetTraversal(cG, biC);
+    }
+
     private void process(ICurve<T, V> c, K k, BiConsumer<K, T> biC) {
         c.process(t -> biC.accept(k, t));
     }

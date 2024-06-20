@@ -21,6 +21,14 @@ public class Demo1 {
         ICurve<Data2, Double> curve2 = Curve.create(data2);
         // 曲线计算
         curve1
+                // 全局前置处理器
+                .globalPreProcessor(curve -> System.out.println("process:"))
+                // 全局后置处理器
+                .globalPostProcessor(curve -> System.out.println())
+                // 前置处理器
+                .preProcessor(d -> System.out.print(d.getVal() + "->"))
+                // 后置处理器
+                .postProcessor(d -> System.out.print(d.getVal() + "\t"))
                 // 计算
                 .process(d -> d.getVal() * 2, Data1::setVal)
                 // 条件计算
