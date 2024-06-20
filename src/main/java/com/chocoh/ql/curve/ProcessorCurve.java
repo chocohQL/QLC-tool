@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.function.*;
 
 /**
+ * 处理器增强曲线
+ *
  * @author chocoh
  */
 public class ProcessorCurve<T, V> extends Curve<T, V> {

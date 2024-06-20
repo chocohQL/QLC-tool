@@ -10,6 +10,8 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 
 /**
+ * 分组曲线
+ *
  * @author chocoh
  */
 @SuppressWarnings("UnusedReturnValue")

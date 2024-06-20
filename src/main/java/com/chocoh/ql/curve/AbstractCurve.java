@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.function.*;
 
 /**
+ * 抽象曲线
+ *
  * @author chocoh
  */
 public abstract class AbstractCurve<T, V> extends ArrayList<T> implements ICurve<T, V>, MetaCurveOp<T, V> {

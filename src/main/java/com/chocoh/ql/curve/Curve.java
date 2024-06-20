@@ -4,9 +4,11 @@ import java.util.*;
 import java.util.function.*;
 
 /**
+ * 曲线
+ *
  * @author chocoh
  */
-public class Curve<T, V> extends AbstractCurve<T, V> implements ICurve<T, V> {
+public class Curve<T, V> extends AbstractCurve<T, V> {
     @Override
     public ICurve<T, V> process(Consumer<T> c) {
         return traversal(c);

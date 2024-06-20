@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.function.*;
 
 /**
+ * 曲线
+ *
  * @author chocoh
  */
 @SuppressWarnings("UnusedReturnValue")

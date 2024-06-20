@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.function.*;
 
 /**
+ * 曲线元操作
+ *
  * @author chocoh
  */
 public interface MetaCurveOp<T, V> {

@@ -4,20 +4,17 @@ import com.chocoh.ql.function.TriFunction;
 import com.chocoh.ql.function.TriPredicate;
 import com.chocoh.ql.function.TriConsumer;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.*;
 import java.util.stream.Collectors;
 
 /**
+ * 分组曲线
+ *
  * @author chocoh
  */
-public class CurveGroup<K, T, V> extends HashMap<K, ICurve<T, V>> implements ICurveGroup<K, T, V> {
-    public static <K, T, V> CurveGroup<K, T, V> create(List<T> l, Function<T, K> f) {
-        return create(l.stream().collect(Collectors.groupingBy(f)));
-    }
-
+public class CurveGroup<K, T, V> extends AbstractCurveGroup<K, T, V> {
     @Override
     public ICurveGroup<K, T, V> process(BiConsumer<K, T> biC) {
         return keySetTraversal((k, c) -> process(c, k, biC));
@@ -56,35 +53,11 @@ public class CurveGroup<K, T, V> extends HashMap<K, ICurve<T, V>> implements ICu
         return keySetTraversal(cG, biC);
     }
 
-    private void process(ICurve<T, V> c, K k, BiConsumer<K, T> biC) {
-        c.process(t -> biC.accept(k, t));
+    public static <K, T, V> CurveGroup<K, T, V> create(List<T> l, Function<T, K> f) {
+        return create(l.stream().collect(Collectors.groupingBy(f)));
     }
 
-    private void process(ICurve<T, V> c, K key, BiPredicate<K, T> biP, BiFunction<K, T, V> biF, BiConsumer<T, V> biC) {
-        c.process(t -> biP == null || biP.test(key, t), t -> biF.apply(key, t), biC);
-    }
-
-    private <U> void biProcess(ICurve<T, V> c1, ICurve<U, V> c2, K k, TriPredicate<K, T, U> triP, TriFunction<K, T, U, V> triF, BiConsumer<T, V> biC) {
-        c1.biProcess(c2, (t, u) -> triP == null || triP.test(k, t, u), (t, u) -> triF.apply(k, t, u), biC);
-    }
-
-    private ICurveGroup<K, T, V> keySetTraversal(BiConsumer<K, ICurve<T, V>> biC) {
-        for (K k : this.keySet()) {
-            biC.accept(k, this.get(k));
-        }
-        return this;
-    }
-
-    private <U> ICurveGroup<K, T, V> keySetTraversal(ICurveGroup<K, U, V> cG, TriConsumer<K, ICurve<T, V>, ICurve<U, V>> triC) {
-        if (cG != null) {
-            for (K k : this.keySet()) {
-                triC.accept(k, this.get(k), cG.get(k));
-            }
-        }
-        return this;
-    }
-
-    private static <K, T, V> CurveGroup<K, T, V> create(Map<K, List<T>> cG) {
+    public static <K, T, V> CurveGroup<K, T, V> create(Map<K, List<T>> cG) {
         CurveGroup<K, T, V> curve = new CurveGroup<>();
         for (K k : cG.keySet()) {
             curve.put(k, Curve.create(cG.get(k)));
