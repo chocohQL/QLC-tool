@@ -31,6 +31,8 @@ public class Demo2 {
         curveGroup1
                 // 分组计算
                 .process((Key, d) -> d.getVal() + 0.1, Data1::setVal)
+                // 分组条件计算
+                .process((key, d) -> d.getVal() > 0.5, (Key, d) -> d.getVal() + 0.1, Data1::setVal)
                 // 分组叠加计算
                 .biProcess(curveGroup2, (key, d1, d2) -> d1.getVal() + d2.getVal(), Data1::setVal)
                 // 分组条件叠加计算
@@ -38,7 +40,8 @@ public class Demo2 {
                         (key, d1, d2) -> d1.getVal() + d2.getVal() > 0.5 || key.equals("00"),
                         (key, d1, d2) -> d1.getVal() * 2,
                         Data1::setVal)
-                // 曲线分组
+                // 调出分组曲线
+                .forCurve((key, curve1) -> System.out.println(key + ":" + curve1))
                 .forCurve(curveGroup2, (key, curve1, curve2) -> {
                     System.out.println(key + ":");
                     curve1

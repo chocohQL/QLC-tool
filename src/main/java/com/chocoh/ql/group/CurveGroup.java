@@ -30,7 +30,7 @@ public class CurveGroup<K, T, V> extends AbstractCurveGroup<K, T, V> {
 
     @Override
 
-    public ICurveGroup<K, T, V> process(BiFunction<K, T, V> biF, BiPredicate<K, T> biP, BiConsumer<T, V> biC) {
+    public ICurveGroup<K, T, V> process(BiPredicate<K, T> biP, BiFunction<K, T, V> biF, BiConsumer<T, V> biC) {
         return keySetTraversal((k, c) -> process(c, k, biP, biF, biC));
     }
 

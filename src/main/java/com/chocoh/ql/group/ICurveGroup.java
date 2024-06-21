@@ -21,7 +21,7 @@ public interface ICurveGroup<K, T, V> extends Map<K, ICurve<T, V>> {
 
     ICurveGroup<K, T, V> process(BiFunction<K, T, V> biF, BiConsumer<T, V> biC);
 
-    ICurveGroup<K, T, V> process(BiFunction<K, T, V> biF, BiPredicate<K, T> biP, BiConsumer<T, V> biC);
+    ICurveGroup<K, T, V> process(BiPredicate<K, T> biP, BiFunction<K, T, V> biF, BiConsumer<T, V> biC);
 
     <U> ICurveGroup<K, T, V> biProcess(ICurveGroup<K, U, V> cG, TriFunction<K, T, U, V> triF, BiConsumer<T, V> biC);
 
