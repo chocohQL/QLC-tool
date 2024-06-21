@@ -1,4 +1,6 @@
-package com.chocoh.ql.curve;
+package com.chocoh.ql.meta;
+
+import com.chocoh.ql.curve.ICurve;
 
 import java.util.List;
 import java.util.function.*;

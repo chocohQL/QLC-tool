@@ -1,5 +1,7 @@
 package com.chocoh.ql.curve;
 
+import com.chocoh.ql.meta.MetaCurveOp;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.*;

@@ -1,5 +1,7 @@
-package com.chocoh.ql.curve;
+package com.chocoh.ql.meta;
 
+import com.chocoh.ql.curve.ICurve;
+import com.chocoh.ql.group.ICurveGroup;
 import com.chocoh.ql.function.TriConsumer;
 import com.chocoh.ql.function.TriFunction;
 import com.chocoh.ql.function.TriPredicate;

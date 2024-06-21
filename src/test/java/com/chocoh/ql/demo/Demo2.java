@@ -1,7 +1,7 @@
 package com.chocoh.ql.demo;
 
-import com.chocoh.ql.curve.CurveGroup;
-import com.chocoh.ql.curve.ICurveGroup;
+import com.chocoh.ql.group.CurveGroup;
+import com.chocoh.ql.group.ICurveGroup;
 import com.chocoh.ql.demo.data.Data1;
 import com.chocoh.ql.demo.data.Data2;
 
