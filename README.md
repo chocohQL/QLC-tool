@@ -1,11 +1,5 @@
 # QLC-tool
 
-> 失手扑空蓝色的蜻蛉
->
-> Author: [chocohQL](https://github.com/chocohQL)
->
-> GitHub: [https://github.com/chocohQL/QLC-tool](https://github.com/chocohQL/QLC-tool)
-
 ## 简介
 
 QLC-tool 是一个曲线计算模板工具，使用函数式编程的方式定义曲线计算流程，包括自定义公式计算、多曲线叠加计算、曲线分组计算、前后置处理器等功能，在一些场景下可以极大提高开发效率，简化代码，使开发者专注数据处理而不是维护数据关系。
