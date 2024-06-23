@@ -17,9 +17,9 @@ QLC-tool 是一个曲线计算模板工具，使用函数式编程的方式定�
 在一些数据可视化平台中，经常需要计算生成不同曲线进行展示，在编写业务代码时你可能会遇下面这些情况：
 
 + 曲线数据存储在两张不同的表中，数据集合类型不一致，例如数据曲线与参数曲线叠加计算
-+ 一次性查询出多条曲线数据需要分组后进行操作，例如随时间变化的曲线，按照每一天的数据绘制一条曲线
-
-如果使用 Stream 流或原生集合遍历的方法进行曲线处理，需要编写很多与核心计算无关的过程来维护数据集合关系。
++ 一次性查询出多条曲线数据需要分组后进行操作，例如随时间变化的曲线，按照每一天的数据绘制一条曲
++ 使用 Stream 流或原生集合遍历的方法进行曲线处理，需要编写很多与核心计算无关的过程来维护数据集合关系
++ 需要进行代码复用、中间过程记录、日志记录等，编写复杂 SQL 或调用其他服务难以满足业务需求
 
 这些场景下使用 QLC-tool 曲线模板工具重构业务代码前后，看起来是这样的：
 
@@ -52,9 +52,9 @@ process 方法针对的是曲线每一个元素，第一个表达式产生结果
 
 ```java
 // 曲线计算 ICurve<T, V> process(Function<T, V> f, BiConsumer<T, V> biC);
-curve.process(d -> d.getVal() * 2, Data1::setVal);
-
-curve.process(d -> d.getVal() * 2, (d, v) -> System.out.println(v));
+curve
+        .process(d -> d.getVal() * 2, Data1::setVal);
+        .process(d -> d.getVal() * 2, (d, v) -> System.out.println(v));
 ```
 
 三个参数的 process 方法为需要传递条件断言，满足条件的才会执行后续定义的计算逻辑
@@ -111,6 +111,8 @@ curve1
 
 如果你需要将数据分为多个曲线，且需要对不同组的曲线进行不同的叠加操作，那么使用分组曲线是一个不错的选择。
 
+![](https://fastly.jsdelivr.net/gh/chocohQL/ql-file@main/assets/githubQLC-tool-06.svg)
+
 ICurveGroup 继承了 Map ，它有三个泛型，第一个为分组 Key 的类型，后两个与 Curve 一致，CurveGroup 为通用实现类，提供了创建分组曲线的方法，需要传入数据集合和进行分组的规则。需要注意的是分组并不是指一个 key 对应了多条曲线，分组是针对的数据，它实际上是 Map<K, ICurve<T, V>> 的形式，在两个 CurveGroup 进行叠加计算时的分组才是多条曲线。
 
 ```java
@@ -157,7 +159,7 @@ curveGroup1.forCurve(curveGroup2, (key, curve1, curve2) -> {
 
 ### ProcessorCurve
 
-ProcessorCurve 为 Curve 的增强，提供了前后置处理器链，你可以添加多个处理器。数据处理器在每一次数据处理前后触发，拿到的是曲线数据；曲线处理器在一次曲线处理前后触发，拿到的是曲线本身。这个类仅对 Curve 做了简单的重写，并不完善，不推荐使用。
+ProcessorCurve 为 Curve 的增强，提供了前后置处理器链，你可以添加多个处理器。数据处理器在每一次数据处理前后触发，拿到的是曲线数据；曲线处理器在一次曲线处理前后触发，拿到的是曲线本身。这个类仅对 Curve 做了简单的重写，并不完善，建议只作为调试工具使用。
 
 ```java
 ICurve<Data1, Double> curve1 = new ProcessorCurve.Builder<Data1, Double>()
@@ -177,3 +179,7 @@ ICurve<Data1, Double> curve1 = new ProcessorCurve.Builder<Data1, Double>()
         .enableCurveProcessor(true)
         .build();
 ```
+
+## 关系图
+
+![](https://fastly.jsdelivr.net/gh/chocohQL/ql-file@main/assets/githubQLC-tool-08.svg)
