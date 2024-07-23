@@ -4,7 +4,7 @@
 
 QLC-tool 是一个曲线计算模板工具，使用函数式编程的方式定义曲线计算流程，包括自定义公式计算、多曲线叠加计算、曲线分组计算、前后置处理器等功能，在一些场景下可以极大提高开发效率，简化代码，使开发者专注数据处理而不是维护数据关系。
 
-![](https://fastly.jsdelivr.net/gh/chocohQL/ql-file@main/assets/githubQLC-tool-03.svg)
+![](https://fastly.jsdelivr.net/gh/chocohQL/ql-file@main/assets/githubQLC-tool-08.svg)
 
 ## 使用场景
 
@@ -20,6 +20,8 @@ QLC-tool 是一个曲线计算模板工具，使用函数式编程的方式定�
 ![](https://fastly.jsdelivr.net/gh/chocohQL/ql-file@main/assets/githubQLC-tool-02.png)
 
 ## 基本用法
+
+> 工具无其他依赖，可以修改包名后直接复制源码目录到项目中使用或者通过 Maven 安装到本地仓库后引用依赖
 
 ### 创建曲线
 
@@ -70,6 +72,10 @@ curve.process(d -> {
 ```
 
 ### 多曲线叠加处理
+
+单曲线处理可以直接使用 Stream 流实现，而多曲线叠加处理才是该工具的核心功能。
+
+![](https://fastly.jsdelivr.net/gh/chocohQL/ql-file@main/assets/githubQLC-tool-03.svg)
 
 如果你需要对两条曲线进行叠加处理，并且它们的在曲线集合中的数据一一对应，那么可以使用 biProcess 方法。biProcess 的使用逻辑和 process 相似，你可以传递不同类型的曲线集合，但是用于计算的泛型需要一致。
 
@@ -153,7 +159,9 @@ curveGroup1.forCurve(curveGroup2, (key, curve1, curve2) -> {
 
 ### ProcessorCurve
 
-ProcessorCurve 为 Curve 的增强，提供了前后置处理器链，你可以添加多个处理器。数据处理器在每一次数据处理前后触发，拿到的是曲线数据；曲线处理器在一次曲线处理前后触发，拿到的是曲线本身。这个类仅对 Curve 做了简单的重写，并不完善，建议只作为调试工具使用。
+ProcessorCurve 为 Curve 的增强，提供了前后置处理器链，你可以添加多个处理器。数据处理器在每一次数据处理前后触发，拿到的是曲线数据；曲线处理器在一次曲线处理前后触发，拿到的是曲线本身。
+
+ProcessorCurve 仅对 MetaCurveOp 元曲线操作方法做了简单的重写，需要手动添加删除处理器，会产生一定的性能损耗，建议只作为调试工具使用。
 
 ```java
 ICurve<Data1, Double> curve1 = new ProcessorCurve.Builder<Data1, Double>()
@@ -173,7 +181,3 @@ ICurve<Data1, Double> curve1 = new ProcessorCurve.Builder<Data1, Double>()
         .enableCurveProcessor(true)
         .build();
 ```
-
-## 关系图
-
-![](https://fastly.jsdelivr.net/gh/chocohQL/ql-file@main/assets/githubQLC-tool-08.svg)

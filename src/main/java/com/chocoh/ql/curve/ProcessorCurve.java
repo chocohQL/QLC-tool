@@ -10,6 +10,11 @@ import java.util.function.*;
 /**
  * 处理器增强曲线
  *
+ * <p> • ProcessorCurve 为 {@link com.chocoh.ql.curve.Curve} 的增强, 提供了前后置处理器链, 你可以添加多个处理器,
+ * 数据处理器在每一次数据处理前后触发, 拿到的是曲线数据; 曲线处理器在一次曲线处理前后触发, 拿到的是曲线本身. </p>
+ * <p> • ProcessorCurve 仅对 {@link com.chocoh.ql.curve.MetaCurveOp} 元曲线操作方法做了简单的重写, 需要手动添加删除处理器,
+ * 会产生一定的性能损耗, 建议只作为调试工具使用. </p>
+ *
  * @author chocoh
  */
 public class ProcessorCurve<T, V> extends Curve<T, V> {

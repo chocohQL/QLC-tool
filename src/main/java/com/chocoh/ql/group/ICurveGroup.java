@@ -11,7 +11,7 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 
 /**
- * 分组曲线
+ * 分组曲线模板
  *
  * @author chocoh
  */

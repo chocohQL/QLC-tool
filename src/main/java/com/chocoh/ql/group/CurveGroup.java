@@ -12,7 +12,7 @@ import java.util.function.*;
 import java.util.stream.Collectors;
 
 /**
- * 分组曲线
+ * 分组曲线模板实现
  *
  * @author chocoh
  */

@@ -4,7 +4,6 @@ import com.chocoh.ql.curve.ICurve;
 import com.chocoh.ql.function.TriConsumer;
 import com.chocoh.ql.function.TriFunction;
 import com.chocoh.ql.function.TriPredicate;
-import com.chocoh.ql.meta.MetaGroupOp;
 
 import java.util.HashMap;
 import java.util.function.BiConsumer;
@@ -13,6 +12,10 @@ import java.util.function.BiPredicate;
 
 /**
  * 抽象分组曲线
+ *
+ * <p> AbstractCurveGroup 实现 分组曲线 元操作方法, 默认增强 HashMap </p>
+ * <p> • 接口 {@link com.chocoh.ql.group.MetaGroupOp} 定义分组曲线元操作, 默认简单实现, 子类可按需重写</p>
+ * <p> • 接口 {@link com.chocoh.ql.group.ICurveGroup} 定义分组曲线模板, 留给子类实现</p>
  *
  * @author chocoh
  */

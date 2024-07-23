@@ -1,13 +1,15 @@
 package com.chocoh.ql.curve;
 
-import com.chocoh.ql.meta.MetaCurveOp;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.*;
 
 /**
  * 抽象曲线
+ *
+ * <p> AbstractCurve 实现 曲线 元操作方法, 默认增强 ArrayList </p>
+ * <p> • 接口 {@link com.chocoh.ql.curve.MetaCurveOp} 定义曲线元操作, 默认简单实现, 子类可按需重写</p>
+ * <p> • 接口 {@link com.chocoh.ql.curve.ICurve} 定义曲线模板, 留给子类实现</p>
  *
  * @author chocoh
  */

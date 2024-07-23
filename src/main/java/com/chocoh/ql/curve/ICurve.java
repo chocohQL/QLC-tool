@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.*;
 
 /**
- * 曲线
+ * 曲线模板
  *
  * @author chocoh
  */
