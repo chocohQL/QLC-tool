@@ -10,8 +10,6 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 
 /**
- * 分组曲线元操作
- *
  * @author chocoh
  */
 public interface MetaGroupOp<K, T, V> {

@@ -11,11 +11,8 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 
 /**
- * 分组曲线模板
- *
  * @author chocoh
  */
-@SuppressWarnings("UnusedReturnValue")
 public interface ICurveGroup<K, T, V> extends Map<K, ICurve<T, V>> {
     ICurveGroup<K, T, V> process(BiConsumer<K, T> biC);
 

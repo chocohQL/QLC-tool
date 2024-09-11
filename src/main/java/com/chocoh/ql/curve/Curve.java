@@ -4,8 +4,6 @@ import java.util.*;
 import java.util.function.*;
 
 /**
- * 曲线模板实现
- *
  * @author chocoh
  */
 public class Curve<T, V> extends AbstractCurve<T, V> {
@@ -34,24 +32,11 @@ public class Curve<T, V> extends AbstractCurve<T, V> {
         return biTraversal(curve, (t, u) -> biProcess(t, u, biP, biF, biC));
     }
 
-    @Override
-    public <U> ICurve<T, V> multiProcess(List<ICurve<U, V>> curves, BiFunction<T, U, V> biF, BiConsumer<T, V> biC) {
-        return multiTraversal(curves, c -> biProcess(c, null, biF, biC));
-    }
-
-    @Override
-    public <U> ICurve<T, V> multiProcess(List<ICurve<U, V>> curves, BiPredicate<T, U> biP, BiFunction<T, U, V> biF, BiConsumer<T, V> biC) {
-        return multiTraversal(curves, c -> biProcess(c, biP, biF, biC));
-    }
-
-    public static <T, V> ICurve<T, V> create(List<T> l) {
-        return new Curve<>(l);
-    }
-
     public Curve(List<T> l) {
         super(l);
     }
 
     public Curve() {
+        super();
     }
 }

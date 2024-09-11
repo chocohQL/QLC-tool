@@ -135,7 +135,7 @@ curveGroup1
         .biProcess(curveGroup2, (key, d1, d2) -> d1.getVal() + d2.getVal(), Data1::setVal)
         // 分组条件叠加计算
         .biProcess(curveGroup2,
-                (key, d1, d2) -> key.equals("00") || d1.getVal() + d2.getVal() > 0.5,
+                (key, d1, d2) -> key.equals("group1") || d1.getVal() + d2.getVal() > 0.5,
                 (key, d1, d2) -> d1.getVal() * 2,
                 Data1::setVal)
 ```
@@ -155,29 +155,4 @@ curveGroup1.forCurve(curveGroup2, (key, curve1, curve2) -> {
                     .process(d -> System.out.print(d.getVal() + "\t"));
             System.out.println();
         });
-```
-
-### ProcessorCurve
-
-ProcessorCurve 为 Curve 的增强，提供了前后置处理器链，你可以添加多个处理器。数据处理器在每一次数据处理前后触发，拿到的是曲线数据；曲线处理器在一次曲线处理前后触发，拿到的是曲线本身。
-
-ProcessorCurve 仅对 MetaCurveOp 元曲线操作方法做了简单的重写，需要手动添加删除处理器，会产生一定的性能损耗，建议只作为调试工具使用。
-
-```java
-ICurve<Data1, Double> curve1 = new ProcessorCurve.Builder<Data1, Double>()
-        // 数据
-        .data(data1)
-        // 前置数据处理器
-        .preDataProcessor(d -> System.out.print(d.getVal() + " -> "), "p1")
-        // 后置数据处理器
-        .postDataProcessor(d -> System.out.print(d.getVal() + "    "), "p2")
-        // 前置曲线处理器
-        .preCurveProcessor(curve -> System.out.println("process: "), "c1")
-        // 后置曲线处理器
-        .postCurveProcessor(curve -> System.out.println(), "c2")
-        // 是否开启前后置数据处理器（默认开启）
-        .enableDataProcessor(true)
-        // 是否开启前后置曲线处理器（默认开启）
-        .enableCurveProcessor(true)
-        .build();
 ```

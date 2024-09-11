@@ -11,12 +11,6 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 
 /**
- * 抽象分组曲线
- *
- * <p> AbstractCurveGroup 实现 分组曲线 元操作方法, 默认增强 HashMap </p>
- * <p> • 接口 {@link com.chocoh.ql.group.MetaGroupOp} 定义分组曲线元操作, 默认简单实现, 子类可按需重写</p>
- * <p> • 接口 {@link com.chocoh.ql.group.ICurveGroup} 定义分组曲线模板, 留给子类实现</p>
- *
  * @author chocoh
  */
 public abstract class AbstractCurveGroup<K, T, V> extends HashMap<K, ICurve<T, V>> implements ICurveGroup<K, T, V>, MetaGroupOp<K, T, V> {

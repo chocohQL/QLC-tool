@@ -5,22 +5,9 @@ import java.util.List;
 import java.util.function.*;
 
 /**
- * 抽象曲线
- *
- * <p> AbstractCurve 实现 曲线 元操作方法, 默认增强 ArrayList </p>
- * <p> • 接口 {@link com.chocoh.ql.curve.MetaCurveOp} 定义曲线元操作, 默认简单实现, 子类可按需重写</p>
- * <p> • 接口 {@link com.chocoh.ql.curve.ICurve} 定义曲线模板, 留给子类实现</p>
- *
  * @author chocoh
  */
 public abstract class AbstractCurve<T, V> extends ArrayList<T> implements ICurve<T, V>, MetaCurveOp<T, V> {
-    public AbstractCurve() {
-    }
-
-    public AbstractCurve(List<T> l) {
-        super(l);
-    }
-
     @Override
     public void process(T t, Predicate<T> p, Function<T, V> f, BiConsumer<T, V> biC) {
         if (p == null || p.test(t)) {
@@ -53,13 +40,11 @@ public abstract class AbstractCurve<T, V> extends ArrayList<T> implements ICurve
         return this;
     }
 
-    @Override
-    public <U> ICurve<T, V> multiTraversal(List<ICurve<U, V>> cs, Consumer<ICurve<U, V>> c) {
-        if (cs != null && !cs.isEmpty()) {
-            for (int i = 0; i < cs.get(0).size(); i++) {
-                c.accept(cs.get(i));
-            }
-        }
-        return this;
+    public AbstractCurve(List<T> l) {
+        super(l);
+    }
+
+    public AbstractCurve() {
+        super();
     }
 }

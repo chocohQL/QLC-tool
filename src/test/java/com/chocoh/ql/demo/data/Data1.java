@@ -6,16 +6,21 @@ import java.util.Objects;
  * @author chocoh
  */
 public class Data1 {
-    private Double val;
     private Integer x;
+    private Double val;
     private String type;
 
     public Data1() {
     }
 
-    public Data1(Double val, Integer x, String type) {
-        this.val = val;
+    public Data1(Integer x, Double val) {
         this.x = x;
+        this.val = val;
+    }
+
+    public Data1(Integer x, Double val, String type) {
+        this.x = x;
+        this.val = val;
         this.type = type;
     }
 
@@ -54,7 +59,6 @@ public class Data1 {
 
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Data1 data1 = (Data1) o;
